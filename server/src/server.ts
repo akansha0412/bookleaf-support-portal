@@ -2,8 +2,8 @@
 import 'dotenv/config';
 import app from './app.js';
 
-const port = Number(process.env.PORT ?? 4000);
+const port = Number(process.env.PORT) || 4000;
 
-app.listen(port, () => {
-  console.log(`BookLeaf API listening on port ${port}`);
+app.listen(port, '0.0.0.0', () => {
+  console.log(`Server running on port ${port}`);
 });
