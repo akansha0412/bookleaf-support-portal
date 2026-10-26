@@ -1,23 +1,3 @@
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
-import { LoginPage } from './features/auth/LoginPage';
-import { useAuth } from './features/auth/useAuth';
-import { AdminDashboard } from './features/tickets/AdminDashboard';
-
-function App() {
-  const { auth, checkingAuth, login, logout } = useAuth();
-
-  if (checkingAuth) {
-    return (
-      <div className="flex min-h-screen items-center justify-center bg-slate-50">
-        <div className="text-sm font-medium text-slate-500">Checking your session…</div>
-      </div>
-    );
-  }
-
-  return (
-    <BrowserRouter># BookLeaf Author Support & Communication Portal
-
-An AI-assisted support portal for BookLeaf Publishing, built to help authors track their books, understand royalties, and raise support tickets while enabling administrators to manage requests and draft consistent, knowledge-grounded responses.
 
 ## Project Overview
 
@@ -174,9 +154,8 @@ Ensure the frontend API configuration points to the local backend. For a deploye
 
 For the local demo, use the administrator and author accounts created by the seed process. Their configured emails and passwords must match the local environment and seed implementation.
 
-**Live demo:** To be added after deployment.
+**Live demo:** https://bookleaf-support-portal-lac.vercel.app.
 
-**Demo credentials:** Add the dedicated demo account emails and passwords after configuring the hosted environment. Do not publish development secrets or personal account credentials.
 
 ## API Documentation
 
@@ -222,19 +201,3 @@ These commands build the TypeScript backend and run the configured automated tes
 * Keep administrator-only internal notes separate from public author responses.
 * Use dedicated demo credentials and never expose real user data in the public demo.
 
-      <Routes>
-        <Route
-          path="/login"
-          element={auth ? <Navigate to="/admin" replace /> : <LoginPage onLogin={login} />}
-        />
-        <Route
-          path="/admin"
-          element={auth?.user.role === 'ADMIN' ? <AdminDashboard auth={auth} onLogout={logout} /> : <Navigate to="/login" replace />}
-        />
-        <Route path="*" element={<Navigate to={auth ? '/admin' : '/login'} replace />} />
-      </Routes>
-    </BrowserRouter>
-  );
-}
-
-export default App;
