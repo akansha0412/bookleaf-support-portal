@@ -244,7 +244,6 @@ export function TicketQueue({
 
       <div className="flex flex-wrap items-center justify-between gap-2 border-t border-slate-100 px-6 py-4 text-xs text-slate-500">
         <span>BookLeaf Author Support</span>
-        <span>Ticket data is loaded from your backend API.</span>
       </div>
       {selectedTicket && auth !== null && (
         <TicketDetailPanel

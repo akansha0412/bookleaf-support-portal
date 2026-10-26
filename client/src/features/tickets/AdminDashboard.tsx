@@ -22,6 +22,7 @@ export function AdminDashboard({
   const [category, setCategory] = useState('');
   const [search, setSearch] = useState('');
   const [refreshKey, setRefreshKey] = useState(0);
+  const [hasLoadedOnce, setHasLoadedOnce] = useState(false);
 
   const queryString = useMemo(() => {
     const params = new URLSearchParams();
@@ -37,7 +38,9 @@ export function AdminDashboard({
     const controller = new AbortController();
 
     async function loadTickets() {
-      setLoading(true);
+      if (!hasLoadedOnce) {
+        setLoading(true);
+      }
       setError('');
 
       try {
@@ -52,14 +55,17 @@ export function AdminDashboard({
         if (controller.signal.aborted) return;
         setError(err instanceof Error ? err.message : 'Unable to load tickets.');
       } finally {
-        if (!controller.signal.aborted) setLoading(false);
+        if (!controller.signal.aborted) {
+          setLoading(false);
+          setHasLoadedOnce(true);
+        }
       }
     }
 
     void loadTickets();
 
     return () => controller.abort();
-  }, [auth.token, queryString, refreshKey]);
+  }, [auth.token, queryString, refreshKey, hasLoadedOnce]);
 
 
 useEffect(() => {
