@@ -161,7 +161,7 @@ For the local demo, use the administrator and author accounts created by the see
 
 When the backend is running locally, Swagger UI is available at:
 
-`http://localhost:4000/api-docs`
+`http://localhost:4000/api-docs` or `https://bookleaf-support-api-tgyk.onrender.com/api-docs/`
 
 The API includes authentication, author book and royalty endpoints, author ticket endpoints, and administrator ticket-management actions. Protected endpoints require a valid bearer token, and administrator routes enforce role-based access.
 
